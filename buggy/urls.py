@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^pushers$', views.pushers, name='pushers'),
     url(r'^create_pusher$', views.create_pusher, name='create_pusher'),
+    url(r'^delete_pusher/(?P<p_id>[0-9]+)$', views.delete_pusher, name='delete_pusher'),
 ]

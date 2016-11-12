@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from pushers.models import *
 from pushers.forms import PusherForm
 
@@ -26,3 +26,6 @@ def create_pusher(request):
             p.save()
 
     return redirect(index)
+
+def delete_pusher(request, p_id):
+    pusher = get_object_or_404(Pusher, id=p_id)
