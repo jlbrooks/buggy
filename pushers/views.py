@@ -25,7 +25,9 @@ def create_pusher(request):
 
             p.save()
 
-    return redirect(index)
+    return redirect(pushers)
 
 def delete_pusher(request, p_id):
     pusher = get_object_or_404(Pusher, id=p_id)
+    pusher.delete()
+    return redirect(pushers)

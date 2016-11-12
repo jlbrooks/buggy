@@ -7,7 +7,7 @@
       <h2>Current pushers</h2>
       <ul>
         {% for pusher in pushers %}
-          <li>{{ pusher.name }} - {{ pusher.phone }}</li>
+          <li>{{ pusher.name }} - {{ pusher.phone }} <a href="{% url "delete_pusher" pusher.id %}">Remove</a></li>
         {% endfor %}
       </ul>
     </div>
