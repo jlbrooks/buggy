@@ -7,3 +7,6 @@ class Pusher(models.Model):
 
     def name(self):
         return ' '.join([self.first_name, self.last_name])
+
+class RollsDay(models.Model):
+    date = models.DateField()

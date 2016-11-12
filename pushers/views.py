@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from pushers.models import *
-from pushers.forms import PusherForm
+from pushers.forms import PusherForm, RollsDayForm
 
 def index(request):
     context = {
@@ -13,6 +13,21 @@ def pushers(request):
         'pushers': Pusher.objects.all()
     }
     return render(request, "pushers.html", context)
+
+def rolls(request):
+    context = {
+        'rolls': RollsDay.objects.all()
+    }
+    return render(request, "rolls.html", context)
+
+def create_roll_day(request):
+    if request.method == 'POST':
+        form = RollsDayForm(request.POST)
+        if form.is_valid():
+            r = RollsDay(date=form.cleaned_data['date'])
+            r.save()
+
+    return redirect(rolls)
 
 def create_pusher(request):
     if request.method == 'POST':

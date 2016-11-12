@@ -1,0 +1,24 @@
+{% extends "__base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      {% for roll in rolls %}
+        <h3>{{ roll.date }}</h3>
+      {% endfor %}
+    </div>
+    <div class="col-md-4">
+      <h2>New Day of Rolls</h2>
+      <form action="{% url 'create_roll_day' %}" method="POST" class="form-inline">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input id="rolls-date" type="date" class="form-control" name="date">
+        </div>
+        <input type="submit" value="Create">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

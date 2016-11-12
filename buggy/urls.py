@@ -20,6 +20,11 @@ from pushers import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
+    # Rolls urls
+    url(r'^rolls$', views.rolls, name='rolls'),
+    url(r'^create_roll_day$', views.create_roll_day, name='create_roll_day'),
+
+    # Pusher urls
     url(r'^pushers$', views.pushers, name='pushers'),
     url(r'^create_pusher$', views.create_pusher, name='create_pusher'),
     url(r'^delete_pusher/(?P<p_id>[0-9]+)$', views.delete_pusher, name='delete_pusher'),
