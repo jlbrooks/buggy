@@ -20,5 +20,6 @@ from pushers import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
+    url(r'^pushers$', views.pushers, name='pushers'),
     url(r'^create_pusher$', views.create_pusher, name='create_pusher'),
 ]

@@ -1,42 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-  {% load staticfiles %}
-  <title>Pusher assignments</title>
+{% extends "__base.html" %}
 
-  <link rel="stylesheet" href="{% static "bootstrap-3.3.7-dist/css/bootstrap.min.css" %}">
-  <script src="{% static "bootstrap-3.3.7-dist/js/bootstrap.min.js" %}"></script>
-</head>
-<body>
+{% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h2>Create New Pusher</h2>
-      <form action="{% url 'create_pusher' %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="first_name">First name</label>
-          <input type="text" class="form-control" name="first_name">
-        </div>
-        <div class="form-group">
-          <label for="last_name">Last name</label>
-          <input type="text" class="form-control" name="last_name">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="phone" class="form-control" name="phone">
-        </div>
-        <input type="submit" value="Create">
-      </form>
-    </div>
-    <div class="col-md-6">
-      <ul>
-        {% for pusher in pushers %}
-          <li>{{ pusher.name }} - {{ pusher.phone }}</li>
-        {% endfor %}
-      </ul>
+      <h2>Roll order</h2>
     </div>
   </div>
 </div>
-</body>
-</html>
+{% endblock content %}

@@ -8,6 +8,12 @@ def index(request):
     }
     return render(request, "index.html", context)
 
+def pushers(request):
+    context = {
+        'pushers': Pusher.objects.all()
+    }
+    return render(request, "pushers.html", context)
+
 def create_pusher(request):
     if request.method == 'POST':
         form = PusherForm(request.POST)
