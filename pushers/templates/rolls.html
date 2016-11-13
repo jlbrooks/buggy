@@ -15,9 +15,27 @@
         </ul>
         <h4>Rolls</h4>
         <a href="{% url "create_roll" rollsDay.id %}">Create new roll</a>
-        {% for roll in rolls %}
-          
+        <div class="panel-group" id="day-{{rollsDay.id}}-accordion" role="tablist" aria-multiselectable="true">
+        {% for roll in rollsDay.roll_set.all %}
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="roll-{{rollsDay.id}}-{{forloop.counter}}">
+              <h5 class="panel-title">
+                <a href="#collapse-{{rollsDay.id}}-{{forloop.counter}}" role="button" data-toggle="collapse"
+                data-parent="#day-{{rollsDay.id}}-accordion"
+                aria-controls="collapse-{{rollsDay.id}}-{{forloop.counter}}">
+                  Roll {{ forloop.counter }}
+                </a>
+              </h5>
+            </div>
+            <div id="collapse-{{rollsDay.id}}-{{forloop.counter}}" class="panel-collapse collapse" role="tabpanel"
+            aria-labelledby="roll-{{rollsDay.id}}-{{forloop.counter}}">
+              <div class="panel-body">
+                {% include "_roll_table.html" with rolls=roll.buggyroll_set.all %}
+              </div>
+            </div>
+          </div>
         {% endfor %}
+        </div>
       {% endfor %}
     </div>
     <div class="col-md-4">
