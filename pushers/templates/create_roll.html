@@ -4,6 +4,19 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
+      <h2>Buggy order</h2>
+      <form class="form">
+        <div class="form-group">
+          <label for="buggy_one">First buggy</label>
+          <select name="buggy_one">
+            {% for buggy in buggies %}
+              <option value="{{buggy.id}}">{{ buggy.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6">
       <h2>Active pushers</h2>
       <a href="{% url "edit_active_pushers" rollDay.id %}">Edit active pushers</a>
       <ul>
@@ -11,9 +24,6 @@
           <li>{{ pusher.name }} - {{ pusher.phone }}</li>
         {% endfor %}
       </ul>
-    </div>
-    <div class="col-md-6">
-
     </div>
   </div>
 </div>

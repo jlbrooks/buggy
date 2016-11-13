@@ -58,7 +58,8 @@ def deactivate_pusher(request, r_id, p_id):
 def create_roll(request, r_id):
     rollDay = get_object_or_404(RollsDay, id=r_id)
     context = {
-        'rollDay': rollDay
+        'rollDay': rollDay,
+        'buggies': Buggy.objects.all()
     }
 
     if request.method == 'GET':
