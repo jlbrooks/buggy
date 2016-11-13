@@ -5,27 +5,27 @@
   <div class="row">
     <div class="col-md-8">
       {% for rollsDay in rollsDays %}
-        <h3>{{ rollsDay.date }}</h3>
-        <h4>Active Pushers</h4>
+        <h1>{{ rollsDay.date }}</h1>
+        <h2>Active Pushers</h2>
         <a href="{% url "edit_active_pushers" rollsDay.id %}">Edit active pushers</a>
         <ul>
         {% for pusher in rollsDay.active_pushers.all %}
           <li>{{ pusher.name }} - {{ pusher.phone }}</li>
         {% endfor %}
         </ul>
-        <h4>Rolls</h4>
+        <h2>Rolls</h2>
         <a href="{% url "create_roll" rollsDay.id %}">Create new roll</a>
         <div class="panel-group" id="day-{{rollsDay.id}}-accordion" role="tablist" aria-multiselectable="true">
         {% for roll in rollsDay.roll_set.all %}
           <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="roll-{{rollsDay.id}}-{{forloop.counter}}">
-              <h5 class="panel-title">
+              <h3 class="panel-title">
                 <a href="#collapse-{{rollsDay.id}}-{{forloop.counter}}" role="button" data-toggle="collapse"
                 data-parent="#day-{{rollsDay.id}}-accordion"
                 aria-controls="collapse-{{rollsDay.id}}-{{forloop.counter}}">
                   Roll {{ forloop.counter }}
                 </a>
-              </h5>
+              </h3>
             </div>
             <div id="collapse-{{rollsDay.id}}-{{forloop.counter}}" class="panel-collapse collapse" role="tabpanel"
             aria-labelledby="roll-{{rollsDay.id}}-{{forloop.counter}}">
@@ -39,7 +39,7 @@
       {% endfor %}
     </div>
     <div class="col-md-4">
-      <h2>New Day of Rolls</h2>
+      <h1>New Day of Rolls</h1>
       <form action="{% url 'create_roll_day' %}" method="POST" class="form-inline">
         {% csrf_token %}
         <div class="form-group">

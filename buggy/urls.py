@@ -19,9 +19,8 @@ from pushers import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.rolls, name='rolls'),
     # Roll day urls
-    url(r'^rolls$', views.rolls, name='rolls'),
     url(r'^rolls/create_roll_day$', views.create_roll_day, name='create_roll_day'),
     url(r'^rolls/(?P<r_id>[0-9]+)/edit_active_pushers$', views.edit_active_pushers, name='edit_active_pushers'),
     url(r'^rolls/(?P<r_id>[0-9]+)/activate_pusher/(?P<p_id>[0-9]+)$', views.activate_pusher, name='activate_pusher'),

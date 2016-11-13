@@ -22,6 +22,9 @@ class RollsDay(models.Model):
     date = models.DateField()
     active_pushers = models.ManyToManyField(Pusher)
 
+    class Meta:
+        ordering = ['-date']
+
 class Roll(models.Model):
     day = models.ForeignKey(RollsDay)
 

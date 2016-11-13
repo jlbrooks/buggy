@@ -3,12 +3,6 @@ from pushers.models import *
 from pushers.forms import *
 import random
 
-def index(request):
-    context = {
-        'pushers': Pusher.objects.all()
-    }
-    return render(request, "index.html", context)
-
 def pushers(request):
     context = {
         'pushers': Pusher.objects.all()
