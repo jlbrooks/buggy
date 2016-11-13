@@ -10,3 +10,4 @@ class Pusher(models.Model):
 
 class RollsDay(models.Model):
     date = models.DateField()
+    active_pushers = models.ManyToManyField(Pusher)

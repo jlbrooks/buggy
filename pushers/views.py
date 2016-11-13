@@ -29,6 +29,12 @@ def create_roll_day(request):
 
     return redirect(rolls)
 
+def add_roll_pusher(request):
+    return redirect(rolls)
+
+def delete_roll_pusher(request):
+    return redirect(rolls)
+
 def create_pusher(request):
     if request.method == 'POST':
         form = PusherForm(request.POST)

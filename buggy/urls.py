@@ -23,6 +23,8 @@ urlpatterns = [
     # Rolls urls
     url(r'^rolls$', views.rolls, name='rolls'),
     url(r'^create_roll_day$', views.create_roll_day, name='create_roll_day'),
+    url(r'^add_roll_pusher$', views.add_roll_pusher, name='add_roll_pusher'),
+    url(r'^delete_roll_pusher$', views.delete_roll_pusher, name='delete_roll_pusher'),
 
     # Pusher urls
     url(r'^pushers$', views.pushers, name='pushers'),

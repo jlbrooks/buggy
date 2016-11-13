@@ -6,6 +6,12 @@
     <div class="col-md-8">
       {% for roll in rolls %}
         <h3>{{ roll.date }}</h3>
+        <h4>Active Pushers</h4>
+        <ul>
+        {% for pusher in roll.active_pushers.all %}
+          <li>{{ pusher.name }} - {{ pusher.phone }} <a href="{% url "delete_roll_pusher" pusher.id %}">Remove</a></li>
+        {% endfor %}
+        </ul>
       {% endfor %}
     </div>
     <div class="col-md-4">
