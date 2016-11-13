@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from pushers.models import *
-from pushers.forms import PusherForm, RollsDayForm
+from pushers.forms import *
 
 def index(request):
     context = {
@@ -16,7 +16,7 @@ def pushers(request):
 
 def rolls(request):
     context = {
-        'rolls': RollsDay.objects.all()
+        'rollsDays': RollsDay.objects.all()
     }
     return render(request, "rolls.html", context)
 
@@ -55,6 +55,15 @@ def deactivate_pusher(request, r_id, p_id):
 
     return redirect(edit_active_pushers, r_id)
 
+def create_roll(request, r_id):
+    rollDay = get_object_or_404(RollsDay, id=r_id)
+    context = {
+        'rollDay': rollDay
+    }
+
+    if request.method == 'GET':
+        return render(request, "create_roll.html", context)
+
 def create_pusher(request):
     if request.method == 'POST':
         form = PusherForm(request.POST)
@@ -72,3 +81,23 @@ def delete_pusher(request, p_id):
     pusher = get_object_or_404(Pusher, id=p_id)
     pusher.delete()
     return redirect(pushers)
+
+def buggies(request):
+    context = {
+        'buggies': Buggy.objects.all()
+    }
+    return render(request, "buggies.html", context)
+
+def create_buggy(request):
+    if request.method == 'POST':
+        form = BuggyForm(request.POST)
+        if form.is_valid():
+            b = Buggy(name=form.cleaned_data['name'])
+            b.save()
+
+    return redirect(buggies)
+
+def delete_buggy(request, b_id):
+    buggy = get_object_or_404(Buggy, id=b_id)
+    buggy.delete()
+    return redirect(buggies)

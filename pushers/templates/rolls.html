@@ -4,15 +4,20 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      {% for roll in rolls %}
-        <h3>{{ roll.date }}</h3>
+      {% for rollsDay in rollsDays %}
+        <h3>{{ rollsDay.date }}</h3>
         <h4>Active Pushers</h4>
-        <a href="{% url "edit_active_pushers" roll.id %}">Edit active pushers</a>
+        <a href="{% url "edit_active_pushers" rollsDay.id %}">Edit active pushers</a>
         <ul>
-        {% for pusher in roll.active_pushers.all %}
+        {% for pusher in rollsDay.active_pushers.all %}
           <li>{{ pusher.name }} - {{ pusher.phone }}</li>
         {% endfor %}
         </ul>
+        <h4>Rolls</h4>
+        <a href="{% url "create_roll" rollsDay.id %}">Create new roll</a>
+        {% for roll in rolls %}
+          
+        {% endfor %}
       {% endfor %}
     </div>
     <div class="col-md-4">

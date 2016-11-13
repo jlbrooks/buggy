@@ -1,0 +1,27 @@
+{% extends "__base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Current buggies</h2>
+      <ul>
+        {% for buggy in buggies %}
+          <li>{{ buggy.name }} <a href="{% url "delete_buggy" buggy.id %}">Remove</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>Create new buggy</h2>
+      <form action="{% url 'create_buggy' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name">
+        </div>
+        <input type="submit" value="Create">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
