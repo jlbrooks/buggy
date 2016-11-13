@@ -18,4 +18,4 @@ class RollsDayForm(forms.ModelForm):
         fields = ['date']
 
 class RollForm(forms.Form):
-    buggies = forms.MultipleChoiceField(choices=Buggy.choices())
+    buggies = forms.MultipleChoiceField(choices=Buggy.choices)

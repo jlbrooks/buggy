@@ -1,0 +1,30 @@
+[
+{
+    "model": "pushers.buggy",
+    "pk": 2,
+    "fields": {
+        "name": "Bissa"
+    }
+},
+{
+    "model": "pushers.buggy",
+    "pk": 3,
+    "fields": {
+        "name": "Beacon"
+    }
+},
+{
+    "model": "pushers.buggy",
+    "pk": 5,
+    "fields": {
+        "name": "Bolt"
+    }
+},
+{
+    "model": "pushers.buggy",
+    "pk": 6,
+    "fields": {
+        "name": "Boson"
+    }
+}
+]
