@@ -1,0 +1,24 @@
+{% extends "__base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Active pushers</h2>
+      <ul>
+        {% for pusher in active_pushers %}
+          <li>{{ pusher.name }} - {{ pusher.phone }} <a href="{% url "deactivate_pusher" roll.id pusher.id %}">Deactivate</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>Inactive pushers</h2>
+      <ul>
+        {% for pusher in inactive_pushers %}
+          <li>{{ pusher.name }} - {{ pusher.phone }} <a href="{% url "activate_pusher" roll.id pusher.id %}">Activate</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock content %}

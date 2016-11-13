@@ -7,9 +7,10 @@
       {% for roll in rolls %}
         <h3>{{ roll.date }}</h3>
         <h4>Active Pushers</h4>
+        <a href="{% url "edit_active_pushers" roll.id %}">Edit active pushers</a>
         <ul>
         {% for pusher in roll.active_pushers.all %}
-          <li>{{ pusher.name }} - {{ pusher.phone }} <a href="{% url "delete_roll_pusher" pusher.id %}">Remove</a></li>
+          <li>{{ pusher.name }} - {{ pusher.phone }}</li>
         {% endfor %}
         </ul>
       {% endfor %}

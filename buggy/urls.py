@@ -23,8 +23,9 @@ urlpatterns = [
     # Rolls urls
     url(r'^rolls$', views.rolls, name='rolls'),
     url(r'^create_roll_day$', views.create_roll_day, name='create_roll_day'),
-    url(r'^add_roll_pusher$', views.add_roll_pusher, name='add_roll_pusher'),
-    url(r'^delete_roll_pusher$', views.delete_roll_pusher, name='delete_roll_pusher'),
+    url(r'^edit_active_pushers/(?P<r_id>[0-9]+)$', views.edit_active_pushers, name='edit_active_pushers'),
+    url(r'^activate_pusher/(?P<r_id>[0-9]+)/(?P<p_id>[0-9]+)$', views.activate_pusher, name='activate_pusher'),
+    url(r'^deactivate_pusher/(?P<r_id>[0-9]+)/(?P<p_id>[0-9]+)$', views.deactivate_pusher, name='deactivate_pusher'),
 
     # Pusher urls
     url(r'^pushers$', views.pushers, name='pushers'),
