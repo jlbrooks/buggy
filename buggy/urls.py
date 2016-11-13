@@ -29,6 +29,7 @@ urlpatterns = [
 
     # Roll urls
     url(r'^rolls/(?P<r_id>[0-9]+)/create_roll$', views.create_roll, name='create_roll'),
+    url(r'^rolls/edit_roll/(?P<r_id>[0-9]+)$', views.edit_roll, name='edit_roll'),
 
     # Pusher urls
     url(r'^pushers$', views.pushers, name='pushers'),

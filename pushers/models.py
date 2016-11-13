@@ -8,6 +8,9 @@ class Pusher(models.Model):
     def name(self):
         return ' '.join([self.first_name, self.last_name])
 
+    def __str__(self):
+        return self.name()
+
 class Buggy(models.Model):
     name = models.CharField(max_length=50)
 
@@ -26,6 +29,10 @@ class BuggyRoll(models.Model):
     buggy = models.ForeignKey(Buggy)
     roll = models.ForeignKey(Roll)
 
+    def hills(self):
+        return self.rollhill_set.all().order_by('hill')
+
 class RollHill(models.Model):
     roll = models.ForeignKey(BuggyRoll)
     pusher = models.ForeignKey(Pusher)
+    hill = models.PositiveIntegerField()

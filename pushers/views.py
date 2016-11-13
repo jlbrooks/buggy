@@ -56,6 +56,15 @@ def deactivate_pusher(request, r_id, p_id):
 
     return redirect(edit_active_pushers, r_id)
 
+def edit_roll(request, r_id):
+    roll = get_object_or_404(Roll, id=r_id)
+    context = {
+        'roll': roll
+    }
+
+    return render(request, "edit_roll.html", context)
+
+
 def create_roll(request, r_id):
     rollsDay = get_object_or_404(RollsDay, id=r_id)
     context = {
@@ -63,21 +72,33 @@ def create_roll(request, r_id):
         'buggies': Buggy.objects.all()
     }
 
-    if request.method == 'GET':
-        return render(request, "create_roll.html", context)
-
     if request.method == 'POST':
         form = RollForm(request.POST)
         if form.is_valid():
-            # Generate the random order
+            # Generate the roll
             buggies = [Buggy.objects.get(id=i) for i in form.cleaned_data['buggies']]
-            pushers = rollsDay.active_pushers.all()
+            pushers = list(rollsDay.active_pushers.all())
+            roll = Roll(day=rollsDay)
+            roll.save()
 
             # Shuffle the list of pushers
             random.shuffle(pushers)
+            cur_pusher = 0
             
-            print("Valid")
-            print(form.cleaned_data['buggies'])
+            for buggy in buggies:
+                bRoll = BuggyRoll(buggy=buggy, roll=roll)
+                bRoll.save()
+                for i in range(2,6):
+                    hill = RollHill(roll=bRoll,hill=i)
+                    hill.pusher = pushers[cur_pusher]
+                    cur_pusher = cur_pusher + 1
+                    # If we wrap, re-shuffle and start over
+                    if cur_pusher >= len(pushers):
+                        random.shuffle(pushers)
+                        cur_pusher = 0
+                    hill.save()   
+
+            return redirect(edit_roll, roll.id)
 
     return render(request, "create_roll.html", context) 
 
