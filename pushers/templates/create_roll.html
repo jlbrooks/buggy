@@ -1,26 +1,28 @@
 {% extends "__base.html" %}
+{% load staticfiles %}
 
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-6">
       <h2>Buggy order</h2>
-      <form class="form">
+      <form action="{% url "create_roll" rollsDay.id %}" method="POST" class="form">
+        {% csrf_token %}
         <div class="form-group">
-          <label for="buggy_one">First buggy</label>
-          <select name="buggy_one">
+          <select name="buggies" id="buggy-select" multiple='multiple'>
             {% for buggy in buggies %}
               <option value="{{buggy.id}}">{{ buggy.name }}</option>
             {% endfor %}
           </select>
         </div>
+        <input type="submit" class="btn btn-default" value="Generate Roll order">
       </form>
     </div>
     <div class="col-md-6">
       <h2>Active pushers</h2>
-      <a href="{% url "edit_active_pushers" rollDay.id %}">Edit active pushers</a>
+      <a href="{% url "edit_active_pushers" rollsDay.id %}">Edit active pushers</a>
       <ul>
-        {% for pusher in rollDay.active_pushers.all %}
+        {% for pusher in rollsDay.active_pushers.all %}
           <li>{{ pusher.name }} - {{ pusher.phone }}</li>
         {% endfor %}
       </ul>
@@ -28,3 +30,7 @@
   </div>
 </div>
 {% endblock content %}
+
+{% block resources %}
+<script src="{% static "js/create_roll.js" %}"></script>
+{% endblock resources %}

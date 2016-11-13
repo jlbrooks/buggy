@@ -11,6 +11,21 @@ class Pusher(models.Model):
 class Buggy(models.Model):
     name = models.CharField(max_length=50)
 
+    @classmethod
+    def choices(cls):
+        return [(b.id, b.name) for b in cls.objects.all()]
+
 class RollsDay(models.Model):
     date = models.DateField()
     active_pushers = models.ManyToManyField(Pusher)
+
+class Roll(models.Model):
+    day = models.ForeignKey(RollsDay)
+
+class BuggyRoll(models.Model):
+    buggy = models.ForeignKey(Buggy)
+    roll = models.ForeignKey(Roll)
+
+class RollHill(models.Model):
+    roll = models.ForeignKey(BuggyRoll)
+    pusher = models.ForeignKey(Pusher)

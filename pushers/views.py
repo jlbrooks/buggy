@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from pushers.models import *
 from pushers.forms import *
+import random
 
 def index(request):
     context = {
@@ -56,14 +57,29 @@ def deactivate_pusher(request, r_id, p_id):
     return redirect(edit_active_pushers, r_id)
 
 def create_roll(request, r_id):
-    rollDay = get_object_or_404(RollsDay, id=r_id)
+    rollsDay = get_object_or_404(RollsDay, id=r_id)
     context = {
-        'rollDay': rollDay,
+        'rollsDay': rollsDay,
         'buggies': Buggy.objects.all()
     }
 
     if request.method == 'GET':
         return render(request, "create_roll.html", context)
+
+    if request.method == 'POST':
+        form = RollForm(request.POST)
+        if form.is_valid():
+            # Generate the random order
+            buggies = [Buggy.objects.get(id=i) for i in form.cleaned_data['buggies']]
+            pushers = rollsDay.active_pushers.all()
+
+            # Shuffle the list of pushers
+            random.shuffle(pushers)
+            
+            print("Valid")
+            print(form.cleaned_data['buggies'])
+
+    return render(request, "create_roll.html", context) 
 
 def create_pusher(request):
     if request.method == 'POST':
