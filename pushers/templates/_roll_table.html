@@ -1,0 +1,17 @@
+<table class="table table-bordered">
+  <tr>
+    <td>Buggy</td>
+    <td>Hill 2</td>
+    <td>Hill 3</td>
+    <td>Hill 4</td>
+    <td>Hill 5</td>
+  </tr>
+{% for buggyRoll in rolls %}
+  <tr>
+    <td>{{ buggyRoll.buggy.name }}</td>
+    {% for hill in buggyRoll.hills %}
+    <td>{{ hill.pusher }}</td>
+    {% endfor %}
+  </tr>
+{% endfor %}
+</table>
