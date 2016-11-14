@@ -10,7 +10,19 @@
   <tr>
     <td>{{ buggyRoll.buggy.name }}</td>
     {% for hill in buggyRoll.hills %}
-    <td>{{ hill.pusher }}</td>
+    <td>
+    {% if editable %}
+      <select name="hill-{{hill.id}}">
+      {% for pusher in buggyRoll.roll.pushers %}
+        <option value="{{pusher.id}}" {% if hill.pusher == pusher %} selected {% endif %}>
+          {{pusher.name}}
+        </option>
+      {% endfor %}
+      </select>
+    {% else %}
+      {{ hill.pusher }}
+    {% endif %}
+    </td>
     {% endfor %}
   </tr>
 {% endfor %}

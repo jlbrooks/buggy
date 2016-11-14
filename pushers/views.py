@@ -60,6 +60,13 @@ def edit_roll(request, r_id):
     if request.method == 'POST':
         if 'regenerate' in request.POST:
             roll.assign_pushers(roll.buggies)
+        else:
+            assignments = [k for k in request.POST.keys() if k[0:5] == 'hill-']
+            for assign in assignments:
+                pusher = get_object_or_404(Pusher, id=request.POST[assign])
+                hill = get_object_or_404(RollHill, id=assign[5])
+                hill.pusher = pusher
+                hill.save()
 
 
     return render(request, "edit_roll.html", context)
