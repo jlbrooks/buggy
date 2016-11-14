@@ -41,7 +41,3 @@ urlpatterns = [
     url(r'^create_buggy$', views.create_buggy, name='create_buggy'),
     url(r'^delete_buggy/(?P<b_id>[0-9]+)$', views.delete_buggy, name='delete_buggy'),
 ]
-
-# urlpatterns += patterns('',
-#     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-# )
