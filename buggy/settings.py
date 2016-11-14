@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'buggy.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASE = {}
+DATABASES = {}
 DATABASES['default'].update(db_from_env)
 
 # DATABASES = {
