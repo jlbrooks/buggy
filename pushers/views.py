@@ -5,15 +5,15 @@ from pushers.models import *
 from pushers.forms import *
 import random
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         if username and password:
-            user = authenticate(username, password)
+            user = authenticate(username=username, password=password)
             if user:
-                login(request,user)
+                login(request, user)
                 return redirect(rolls)
 
     return render(request, "login.html")
