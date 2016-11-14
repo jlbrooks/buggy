@@ -30,6 +30,7 @@
             <div id="collapse-{{rollsDay.id}}-{{forloop.counter}}" class="panel-collapse collapse" role="tabpanel"
             aria-labelledby="roll-{{rollsDay.id}}-{{forloop.counter}}">
               <div class="panel-body">
+                <a href="{% url "edit_roll" roll.id %}">Edit roll</a>
                 {% include "_roll_table.html" with rolls=roll.buggyroll_set.all %}
               </div>
             </div>
