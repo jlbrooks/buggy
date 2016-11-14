@@ -1,0 +1,1 @@
+web: gunicorn buggy.wsgi --log-file -
