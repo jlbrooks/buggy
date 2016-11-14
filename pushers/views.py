@@ -1,20 +1,38 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from pushers.models import *
 from pushers.forms import *
 import random
 
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if username and password:
+            user = authenticate(username, password)
+            if user:
+                login(request,user)
+                return redirect(rolls)
+
+    return render(request, "login.html")
+
+@login_required
 def pushers(request):
     context = {
         'pushers': Pusher.objects.all()
     }
     return render(request, "pushers.html", context)
 
+@login_required
 def rolls(request):
     context = {
         'rollsDays': RollsDay.objects.all()
     }
     return render(request, "rolls.html", context)
 
+@login_required
 def create_roll_day(request):
     if request.method == 'POST':
         form = RollsDayForm(request.POST)
@@ -24,6 +42,7 @@ def create_roll_day(request):
 
     return redirect(rolls)
 
+@login_required
 def edit_active_pushers(request, r_id):
     roll = get_object_or_404(RollsDay, id=r_id)
     active = roll.active_pushers.all()
@@ -34,6 +53,7 @@ def edit_active_pushers(request, r_id):
     }
     return render(request, "edit_active_pushers.html", context)
 
+@login_required
 def activate_pusher(request, r_id, p_id):
     roll = get_object_or_404(RollsDay, id=r_id)
     pusher = get_object_or_404(Pusher, id=p_id)
@@ -42,6 +62,7 @@ def activate_pusher(request, r_id, p_id):
 
     return redirect(edit_active_pushers, r_id)
 
+@login_required
 def deactivate_pusher(request, r_id, p_id):
     roll = get_object_or_404(RollsDay, id=r_id)
     pusher = get_object_or_404(Pusher, id=p_id)
@@ -50,7 +71,7 @@ def deactivate_pusher(request, r_id, p_id):
 
     return redirect(edit_active_pushers, r_id)
 
-
+@login_required
 def edit_roll(request, r_id):
     roll = get_object_or_404(Roll, id=r_id)
     context = {
@@ -71,7 +92,7 @@ def edit_roll(request, r_id):
 
     return render(request, "edit_roll.html", context)
 
-
+@login_required
 def create_roll(request, r_id):
     rollsDay = get_object_or_404(RollsDay, id=r_id)
     context = {
@@ -93,6 +114,7 @@ def create_roll(request, r_id):
 
     return render(request, "create_roll.html", context) 
 
+@login_required
 def create_pusher(request):
     if request.method == 'POST':
         form = PusherForm(request.POST)
@@ -106,17 +128,20 @@ def create_pusher(request):
 
     return redirect(pushers)
 
+@login_required
 def delete_pusher(request, p_id):
     pusher = get_object_or_404(Pusher, id=p_id)
     pusher.delete()
     return redirect(pushers)
 
+@login_required
 def buggies(request):
     context = {
         'buggies': Buggy.objects.all()
     }
     return render(request, "buggies.html", context)
 
+@login_required
 def create_buggy(request):
     if request.method == 'POST':
         form = BuggyForm(request.POST)
@@ -126,6 +151,7 @@ def create_buggy(request):
 
     return redirect(buggies)
 
+@login_required
 def delete_buggy(request, b_id):
     buggy = get_object_or_404(Buggy, id=b_id)
     buggy.delete()
