@@ -28,6 +28,10 @@ class RollsDay(models.Model):
 class Roll(models.Model):
     day = models.ForeignKey(RollsDay)
 
+    @property
+    def buggies(self):
+        return list(set([r.buggy for r in BuggyRoll.objects.filter(roll=self)]))
+
 class BuggyRoll(models.Model):
     buggy = models.ForeignKey(Buggy)
     roll = models.ForeignKey(Roll)
