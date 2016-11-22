@@ -34,10 +34,7 @@
 <body>
 {% block content %}{% endblock content %}
 
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
+<script src="{% static "jquery/dist/jquery.min.js" %}"</script>
 <script src="{% static "bootstrap-3.3.7-dist/js/bootstrap.min.js" %}"></script>
 <script src="{% static "multi-select/js/jquery.multi-select.js" %}"></script>
 <script src="{% static "js/buggy.js" %}"></script>
