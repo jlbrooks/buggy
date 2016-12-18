@@ -16,4 +16,5 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "buggy.settings")
 
 application = get_wsgi_application()
 
-application = DjangoWhiteNoise(application)
+if 'HEROKU' in os.environ:
+    application = DjangoWhiteNoise(application)
